@@ -1,11 +1,11 @@
-/******************************************************************************
+/*********************************************************************************
  * 
- * @author <Oleg Ravits>
+ * @author Oleg Ravits
  * @date 2017-11-2
  *
- * @project <Introduction to Embedded Systems Software and Development Environments>
+ * @project Introduction to Embedded Systems Software and Development Environments
  *
- *****************************************************************************/
+ ********************************************************************************/
 
 /******************************************************************************
  * Copyright (C) 2017 by Oleg Ravits
