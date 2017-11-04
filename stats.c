@@ -41,6 +41,8 @@ void main() {
   /* Other Variable Declarations Go Here */
   /* Statistics and Printing Functions Go Here */
 
+    print_statistics(test, SIZE);
+
 }
 
 
@@ -59,7 +61,37 @@ void main() {
  * @return none
  */
 void print_statistics(uint8_t *arr, size_t size){
+    size_t i;
+    uint8_t *s_arr; /*s_arr: is temporary to be sorted array*/
     
+    s_arr = (uint8_t *)malloc(sizeof(uint8_t)*SIZE);
+
+    if(!s_arr){
+	printf("print_statistics(): malloc error \n");
+    	return;
+    }
+
+    for(i=0; i < SIZE; i++){
+	*(s_arr + i) = *(arr + i);
+    }
+
+    s_arr = sort_array(s_arr, SIZE);
+
+    print_array(arr, SIZE);
+
+    //print_array(s_arr, SIZE);
+
+    printf("-------------------\n");
+     printf("Statistics report:\n");
+//    printf("(rounded down to \nthe nearest integer.)\n");
+    printf("-------------------\n");
+    printf("The median  value of array: %u \n",find_median(s_arr,SIZE));
+    printf("The average value of array: %u \n",find_mean(s_arr,SIZE));
+    printf("The maximum value of array: %u \n",find_maximum(s_arr,SIZE));
+    printf("The minimum value of array: %u \n",find_minimum(s_arr,SIZE));
+    printf("\n");
+
+    free(s_arr); //deallocating memory of temporary array    
 }
 
 
@@ -75,7 +107,16 @@ void print_statistics(uint8_t *arr, size_t size){
  * @return none
  */
 void print_array(uint8_t *arr, size_t size){
-
+    size_t i;
+    printf("\n------------- \n");
+    printf("The array is: \n");
+    printf("------------- \n");
+    for(i = 0; i < size; i++){
+	if ((i > 0) && (i % 20 == 0))
+	    printf("\n");
+	printf("%3u ", *(arr + i) );
+    }
+    printf("\n\n");
 }
 
 
@@ -91,7 +132,7 @@ void print_array(uint8_t *arr, size_t size){
  * @return The value of median
  */
 uint8_t find_median(uint8_t *s_arr, size_t size){
-    
+    return s_arr[size/2];
 }
 
 
@@ -106,7 +147,20 @@ uint8_t find_median(uint8_t *s_arr, size_t size){
  * @return The mean value rounded down to the nearest integer.
  */
 uint8_t find_mean(uint8_t *s_arr, size_t size){
+    uint32_t mean = 0; /*uint32_t type to avoid overflow*/
 
+    if (s_arr == NULL)
+	return 0;
+
+    if (size <= 0){
+	size = 1;
+    }
+
+    for(int i = 0; i < size; i++){
+	mean += s_arr[i];
+    }
+
+    return (uint8_t)(((((float)mean)/size)*2+1)/2); //rounding down to the nearest integer
 }
 
 
@@ -122,7 +176,7 @@ uint8_t find_mean(uint8_t *s_arr, size_t size){
  * @return The maximum value
  */
 uint8_t find_maximum(uint8_t *s_arr, size_t size){
-    
+    return s_arr[0];
 }
 
 
@@ -138,7 +192,7 @@ uint8_t find_maximum(uint8_t *s_arr, size_t size){
  * @return The minimum value
  */
 uint8_t find_minimum(uint8_t *s_arr, size_t size){
-    
+    return s_arr[size-1];
 }
 
 
@@ -154,5 +208,22 @@ uint8_t find_minimum(uint8_t *s_arr, size_t size){
  * @return The pointer to the sorted array
  */
 uint8_t *sort_array(uint8_t *arr, size_t size){
+    size_t i,j;
+    uint8_t v;
+
+    for(i = 1; i < size; i++){
+	v = arr[i];
+	j = i;
+	while(arr[j-1] < v && j >= 1){
+	    arr[j] = arr[j-1];
+	    j--;
+	}
+	arr[j] = v;
+    }
+
+    return arr;
 }
+
+
+
 
