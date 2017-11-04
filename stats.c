@@ -63,7 +63,8 @@ void main() {
 void print_statistics(uint8_t *arr, size_t size){
     size_t i;
     uint8_t *s_arr; /*s_arr: is temporary to be sorted array*/
-    
+
+    //allocate the memory for temporary array
     s_arr = (uint8_t *)malloc(sizeof(uint8_t)*SIZE);
 
     if(!s_arr){
@@ -81,14 +82,13 @@ void print_statistics(uint8_t *arr, size_t size){
 
     //print_array(s_arr, SIZE);
 
-    printf("-------------------\n");
-     printf("Statistics report:\n");
-//    printf("(rounded down to \nthe nearest integer.)\n");
-    printf("-------------------\n");
-    printf("The median  value of array: %u \n",find_median(s_arr,SIZE));
-    printf("The average value of array: %u \n",find_mean(s_arr,SIZE));
-    printf("The maximum value of array: %u \n",find_maximum(s_arr,SIZE));
-    printf("The minimum value of array: %u \n",find_minimum(s_arr,SIZE));
+    printf("------------------------\n");
+    printf("Array statistics report:\n");
+    printf("------------------------\n");
+    printf("The median  value: %u \n",find_median(s_arr,SIZE));
+    printf("The mean    value: %u \n",find_mean(s_arr,SIZE));
+    printf("The maximum value: %u \n",find_maximum(s_arr,SIZE));
+    printf("The minimum value: %u \n",find_minimum(s_arr,SIZE));
     printf("\n");
 
     free(s_arr); //deallocating memory of temporary array    
@@ -114,7 +114,7 @@ void print_array(uint8_t *arr, size_t size){
     for(i = 0; i < size; i++){
 	if ((i > 0) && (i % 20 == 0))
 	    printf("\n");
-	printf("%3u ", *(arr + i) );
+	printf("%-3u ", *(arr + i) );
     }
     printf("\n\n");
 }
