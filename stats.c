@@ -160,7 +160,8 @@ uint8_t find_mean(uint8_t *s_arr, size_t size){
 	mean += s_arr[i];
     }
 
-    return (uint8_t)(((((float)mean)/size)*2+1)/2); //rounding down to the nearest integer
+    //return the rounding down to the nearest integer
+    return (uint8_t)(((((float)mean)/size)*2+1)/2); 
 }
 
 
