@@ -9,20 +9,20 @@
 # *****************************************************************************/
 
 #------------------------------------------------------------------------------
-# makefile support two platforms:
+# Simple Makefile supports two platforms:
 #      the host environment and the target embedded system MSP432
 #
 # Use: make [TARGET] [PLATFORM=OVERRIDES]
 #
 # Build Targets:
-#      <FILE>.o - Builds <FILE>.o object file
-#      <FILE>.i - Builds <FILE>.i preprocessed output file
-#      <FILE>.asm - Builds <FILE>.s assembly file
-#      <FILE>.dep - Builds <FILE>.d dependency file
+#      <FILE>.o - builds <FILE>.o object file
+#      <FILE>.i - builds <FILE>.i preprocessed output file
+#      <FILE>.asm - builds <FILE>.s assembly file
+#      <FILE>.dep - builds <FILE>.d dependency file
 #
 #      compile-all - Compile all object files, but DO NOT link
-#      build - Builds and links all source files
-#      all - Same as build
+#      build - builds and links all source files
+#      all - same as build
 #      clean - removes all generated files
 #
 # Platform Overrides:
