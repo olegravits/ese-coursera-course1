@@ -1,0 +1,53 @@
+##############################################
+           module 3
+##############################################
+
+arm-none-eabi-gcc -Wall -std=c99 -Werror -O0 -g -mcpu=cortex-m4 -mthumb --specs=nosys.specs -Wl,-Map=main.map \
+-T ./msp432p401r.lds -o main.out main.c misc.c
+
+===================================
+    compile object file
+===================================
+arm-none-eabi-gcc -c misc.c -Wall -std=c99 -Werror -O0 -g -mcpu=cortex-m4 -mthumb --specs=nosys.specs -o misc.o
+
+arm-none-eabi-gcc -c main.c -Wall -std=c99 -Werror -O0 -g -mcpu=cortex-m4 -mthumb --specs=nosys.specs -o main.o
+
+===================================
+    compile dependency file
+===================================
+arm-none-eabi-gcc -c misc.c -Wall -std=c99 -Werror -O0 -g -mcpu=cortex-m4 -mthumb --specs=nosys.specs -MD
+
+arm-none-eabi-gcc -c main.c -Wall -std=c99 -Werror -O0 -g -mcpu=cortex-m4 -mthumb --specs=nosys.specs -MD
+
+===================================
+    compile assembly file
+===================================
+arm-none-eabi-gcc -c misc.c -Wall -std=c99 -Werror -O0 -g -mcpu=cortex-m4 -mthumb --specs=nosys.specs -S
+
+arm-none-eabi-gcc -c main.c -Wall -std=c99 -Werror -O0 -g -mcpu=cortex-m4 -mthumb --specs=nosys.specs -S
+-----------------------------------
+
+arm-none-eabi-readelf main.out -all
+
+arm-none-eabi-size -Btd main.out main.o misc.o
+arm-none-eabi-size -Bx main.out
+arm-none-eabi-size -Ad main.out
+arm-none-eabi-size main.out
+
+
+arm-none-eabi-objdump --disassemble misc.o > misc.dump
+
+arm-none-eabi-objdump --disassemble main.o > main.dump
+
+arm-none-eabi-nm main.out
+arm-none-eabi-nm main.o
+arm-none-eabi-nm misc.o
+
+-------------------------------------
+git add *
+git commit -m "Module 3: Adding folder /m3 with some files to analyze allocated memory."
+
+git add my_commands.txt
+git commit -m "Adding my_commands.txt file to /m3 to investigate the memory usage of an executable."
+------------------------------------
+
